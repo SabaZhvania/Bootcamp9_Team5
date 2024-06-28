@@ -3,6 +3,7 @@ package ge.tbcitacademy.tests.functionaltests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
+import ge.tbcitacademy.configtests.ConfigTests;
 import ge.tbcitacademy.listeners.CustomTestListener;
 import ge.tbcitacademy.steps.*;
 import ge.tbcitacademy.util.ModdedAllureSelenide;
@@ -19,9 +20,8 @@ import static com.codeborne.selenide.Selenide.open;
 import static ge.tbcitacademy.data.Constants.*;
 
 @Epic("Functional Test")
-@Listeners(CustomTestListener.class)
-public class BookingTest {
-    BaseSteps baseSteps;
+public class BookingTest extends ConfigTests {
+    StaysSteps staysSteps;
     OffersSteps offersSteps;
     HotelSteps hotelSteps;
     BookingDetailsSteps detailsSteps;
@@ -32,23 +32,12 @@ public class BookingTest {
 
     @BeforeClass(alwaysRun = true)
     public void setup(){
-        baseSteps = new BaseSteps();
+        staysSteps = new StaysSteps();
         offersSteps = new OffersSteps();
         hotelSteps = new HotelSteps();
         detailsSteps = new BookingDetailsSteps();
         finalDetailsSteps = new FinalDetailsSteps();
         faker = new Faker();
-
-        SelenideLogger.addListener("AllureSelenide", new ModdedAllureSelenide());
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized");
-
-        Configuration.browserCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
-
-        Configuration.browser = CHROME;
-        Configuration.browserSize = null;
-
         open(BOOKING_URL);
     }
 
@@ -59,7 +48,7 @@ public class BookingTest {
             User fills personal details, but doesn't provide card info, so he/she gets appropriate error messages.
             """)
     public void bookingAndPaymentTest(){
-        baseSteps.validatePageLoad()
+        staysSteps.validatePageLoad()
                 .closeSignInPopUp()
                 .clickDestinationSearchBar()
                 .chooseFirstDestination()

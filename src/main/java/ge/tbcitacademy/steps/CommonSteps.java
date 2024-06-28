@@ -1,5 +1,6 @@
 package ge.tbcitacademy.steps;
 
+import com.codeborne.selenide.Selenide;
 import ge.tbcitacademy.pages.CommonPage;
 import io.qameta.allure.Step;
 
@@ -35,5 +36,11 @@ public class CommonSteps {
     @Step("Click on the 'Search' button")
     public void clickSearch(){
         commonPage.searchButton.click();
+    }
+
+    @Step("Navigate to previous page")
+    public CommonSteps navigateBack(){
+        Selenide.back();
+        return this;
     }
 }

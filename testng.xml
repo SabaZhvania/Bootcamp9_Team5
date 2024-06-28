@@ -3,7 +3,8 @@
 <suite name="TestSuite">
     <test name="TestProject">
         <classes>
-
+            <class name="ge.tbcitacademy.tests.uielementstests.UIElementsTests"/>
+            <class name="ge.tbcitacademy.tests.functionaltests.BookingTest"/>
         </classes>
     </test>
 </suite>
