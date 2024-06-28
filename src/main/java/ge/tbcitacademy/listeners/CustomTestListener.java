@@ -1,4 +1,4 @@
-package ge.tbcitacademy.configtests.listener;
+package ge.tbcitacademy.listeners;
 
 import org.openqa.selenium.OutputType;
 import org.testng.ITestListener;
@@ -13,7 +13,7 @@ import java.util.Objects;
 import static com.codeborne.selenide.Selenide.screenshot;
 import static io.qameta.allure.Allure.addAttachment;
 
-public class CustomTestListener implements ITestListener {
+public class CustomTestListener implements ITestListener{
     @Override
     public void onTestFailure(ITestResult result) {
         try (InputStream is = Files.newInputStream(Path.of(Objects.requireNonNull(screenshot(OutputType.FILE)).getAbsolutePath()))) {

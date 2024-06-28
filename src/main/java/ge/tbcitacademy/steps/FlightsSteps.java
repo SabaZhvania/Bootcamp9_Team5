@@ -5,11 +5,11 @@ import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.visible;
 
-public class FlightsPageSteps {
+public class FlightsSteps {
     FlightsPage flightsPage = new FlightsPage();
 
     @Step("Validate flights page is displayed")
-    public FlightsPageSteps validateFlightsPage(){
+    public FlightsSteps validateFlightsPage(){
         flightsPage.title.shouldBe(visible);
         return this;
     }

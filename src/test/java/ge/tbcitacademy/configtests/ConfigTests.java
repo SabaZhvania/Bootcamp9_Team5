@@ -1,24 +1,28 @@
 package ge.tbcitacademy.configtests;
 
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.FileDownloadMode;
 import com.codeborne.selenide.Selenide;
-import ge.tbcitacademy.configtests.listener.CustomTestListener;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
+import ge.tbcitacademy.listeners.CustomTestListener;
+import ge.tbcitacademy.util.ModdedAllureSelenide;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.*;
+
+import static com.codeborne.selenide.Browsers.CHROME;
 import static com.codeborne.selenide.Configuration.*;
 
 @Listeners({CustomTestListener.class})
 public class ConfigTests {
-    @BeforeMethod
+    @BeforeTest(alwaysRun = true)
     public void initialSetup(){
-        browser = "chrome";
+        browser = CHROME;
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
-        browserCapabilities = options;
+        Configuration.browserCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
+        SelenideLogger.addListener("AllureSelenide", new ModdedAllureSelenide());
         browserSize = null;
         timeout = 20000;
         reopenBrowserOnFail = true;

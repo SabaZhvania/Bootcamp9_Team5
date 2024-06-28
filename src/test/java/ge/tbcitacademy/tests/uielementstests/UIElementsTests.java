@@ -1,9 +1,10 @@
-package ge.tbcitacademy.tests;
+package ge.tbcitacademy.tests.uielementstests;
 
 import ge.tbcitacademy.configtests.ConfigTests;
 import ge.tbcitacademy.data.Constants;
 import ge.tbcitacademy.steps.*;
 import io.qameta.allure.*;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -11,23 +12,25 @@ import static com.codeborne.selenide.Selenide.open;
 
 @Epic("Booking.com UI Tests")
 public class UIElementsTests extends ConfigTests {
-    MainPageSteps mainPageSteps;
-    BaseSteps baseSteps;
-    SearchPageSteps searchPageSteps;
-    FlightsPageSteps flightsPageSteps;
-    CarRentalsPageSteps carRentalsPageSteps;
-    SignInPageSteps signInPageSteps;
-    @BeforeMethod
+    StaysSteps staysSteps;
+    OffersSteps offerSteps;
+    FlightsSteps flightsSteps;
+    CarRentalsSteps carRentalsSteps;
+    SignInSteps signInSteps;
+    @BeforeClass
     public void classSetup(){
-        mainPageSteps = new MainPageSteps();
-        baseSteps = new BaseSteps();
-        searchPageSteps = new SearchPageSteps();
-        flightsPageSteps = new FlightsPageSteps();
-        carRentalsPageSteps = new CarRentalsPageSteps();
-        signInPageSteps = new SignInPageSteps();
-        open(Constants.bookingURL);
-        baseSteps
-                .closePopup();
+        staysSteps = new StaysSteps();
+        offerSteps = new OffersSteps();
+        flightsSteps = new FlightsSteps();
+        carRentalsSteps = new CarRentalsSteps();
+        signInSteps = new SignInSteps();
+    }
+    @BeforeMethod
+    public void testSetup(){
+        open(Constants.BOOKING_URL);
+        staysSteps
+                .validatePageLoad()
+                .closeSignInPopUp();
     }
 
     @Test(description = "Home Page UI Test")
@@ -41,7 +44,7 @@ public class UIElementsTests extends ConfigTests {
             This test ensures that all critical navigation and functional elements are present and visible on the home page.""")
     @Severity(SeverityLevel.BLOCKER)
     public void homePageElementsTest(){
-        mainPageSteps
+        staysSteps
                 .validateSearchBarVisibility()
                 .validateSearchBtn()
                 .validateRegisterBtn()
@@ -61,11 +64,11 @@ public class UIElementsTests extends ConfigTests {
             This test ensures that after performing a search, users can view, filter, and sort the search results effectively.""")
     @Severity(SeverityLevel.BLOCKER)
     public void searchResultElementsTest(){
-        mainPageSteps
-                .inputTextInSearchBar(Constants.location);
-        mainPageSteps
+        staysSteps
+                .inputTextInSearchBar(Constants.LOCATION);
+        staysSteps
                 .clickSearchBtn();
-        searchPageSteps
+        offerSteps
                 .validateOffersVisibility()
                 .validateFiltersPresence()
                 .validateSortBtn();
@@ -85,22 +88,23 @@ public class UIElementsTests extends ConfigTests {
             This test ensures that the main navigation bar is functioning correctly and users can access key sections of the website.""")
     @Severity(SeverityLevel.CRITICAL)
     public void navigationBarTest(){
-        mainPageSteps
+        staysSteps
                 .validateNavBar()
-                .clickNavItem(Constants.flights);
-        flightsPageSteps
+                .clickNavItem(Constants.FLIGHTS);
+        flightsSteps
                 .validateFlightsPage();
-        baseSteps
+        staysSteps
                 .navigateBack();
-        mainPageSteps
-                .clickNavItem(Constants.carRentals);
-        carRentalsPageSteps
+        staysSteps
+                .clickNavItem(Constants.CAR_RENTALS);
+        carRentalsSteps
                 .validateRentalsPage();
-        baseSteps
+        staysSteps
                 .navigateBack();
-        mainPageSteps
-                .clickNavItem(Constants.stays)
-                .validateStaysPage();
+        staysSteps
+                .clickNavItem(Constants.STAYS);
+        staysSteps
+                .validatePageLoad();
     }
 
     @Test(description = "Sign In UI Test")
@@ -116,9 +120,9 @@ public class UIElementsTests extends ConfigTests {
             This test ensures that users can access the sign-in page and that all authentication options are available.""")
     @Severity(SeverityLevel.CRITICAL)
     public void signInPageTest(){
-        mainPageSteps
+        staysSteps
                 .clickSignInBtn();
-        signInPageSteps
+        signInSteps
                 .validateSignInPage()
                 .validateContinueWithEmail()
                 .validateSocialButtons();
