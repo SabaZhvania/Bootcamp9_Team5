@@ -22,6 +22,7 @@ import static ge.tbcitacademy.data.Constants.*;
 @Epic("Functional Test")
 public class BookingTest extends ConfigTests {
     StaysSteps staysSteps;
+    CommonSteps commonSteps;
     OffersSteps offersSteps;
     HotelSteps hotelSteps;
     BookingDetailsSteps detailsSteps;
@@ -33,6 +34,7 @@ public class BookingTest extends ConfigTests {
     @BeforeClass(alwaysRun = true)
     public void setup(){
         staysSteps = new StaysSteps();
+        commonSteps = new CommonSteps();
         offersSteps = new OffersSteps();
         hotelSteps = new HotelSteps();
         detailsSteps = new BookingDetailsSteps();
@@ -48,14 +50,18 @@ public class BookingTest extends ConfigTests {
             User fills personal details, but doesn't provide card info, so he/she gets appropriate error messages.
             """)
     public void bookingAndPaymentTest(){
-        staysSteps.validatePageLoad()
-                .closeSignInPopUp()
+        staysSteps
+                .validatePageLoad()
+                .closeSignInPopUp();
+
+        commonSteps
                 .clickDestinationSearchBar()
                 .chooseFirstDestination()
                 .pickDates(CHECK_IN_DATE, CHECK_OUT_DATE)
                 .clickSearch();
 
-        offersSteps.pickFirstOffer()
+        offersSteps
+                .pickFirstOffer()
                 .switchWindow();
 
         hotelName = hotelSteps.getHotelName();
@@ -63,14 +69,16 @@ public class BookingTest extends ConfigTests {
         price = hotelSteps.getReservationPrice();
         hotelSteps.clickIllReserve();
 
-        detailsSteps.validateDetails(ROOMS_AND_PERSONS_DETAIL, CHECK_IN, CHECK_OUT)
+        detailsSteps
+                .validateDetails(ROOMS_AND_PERSONS_DETAIL, CHECK_IN, CHECK_OUT)
                 .fillName(faker.name().firstName())
                 .fillLastName(faker.name().lastName())
                 .fillMail(faker.internet().emailAddress())
                 .fillNumber(faker.phoneNumber().cellPhone())
                 .clickNext();
 
-        finalDetailsSteps.validateLoad()
+        finalDetailsSteps
+                .validateLoad()
                 .clickCheckBookingBtn()
                 .validateFinalDetails(hotelName, CHECK_IN, CHECK_OUT, price)
                 .clickLooksGoodSubmit()

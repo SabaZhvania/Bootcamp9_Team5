@@ -2,8 +2,10 @@ package ge.tbcitacademy.tests.functionaltests;
 
 import ge.tbcitacademy.configtests.ConfigTests;
 import ge.tbcitacademy.data.Constants;
-import ge.tbcitacademy.steps.LocalizationSteps;
+import ge.tbcitacademy.steps.CommonSteps;
+import ge.tbcitacademy.steps.OffersSteps;
 import ge.tbcitacademy.steps.StaysSteps;
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -12,44 +14,61 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
+import static ge.tbcitacademy.data.Constants.*;
 
-@Epic("Localization")
+@Epic("Functional Test")
 public class LocalizationTests extends ConfigTests {
-
     StaysSteps staysSteps;
-    LocalizationSteps localizationSteps;
+    OffersSteps offersSteps;
+    CommonSteps commonSteps;
 
     @BeforeClass
     public void setUp() {
         staysSteps = new StaysSteps();
-        localizationSteps = new LocalizationSteps();
+        offersSteps = new OffersSteps();
+        commonSteps = new CommonSteps();
     }
 
     @BeforeMethod
     public void beforeMethod(){
         open(Constants.BOOKING_URL);
-        staysSteps.closeSignInPopUp();
+        staysSteps
+                .validatePageLoad()
+                .closeSignInPopUp();
     }
 
-    @Feature("Currency Switching")
-    @Story("User can change currency")
-    @Test(priority =1, description = "Verify that the user can successfully change the currency on Booking.com")
+    @Feature("Localization")
+    @Story("Currency Switching")
+    @Description("""
+            Verify that the user can successfully change the currency on Booking.com
+            """)
+    @Test(priority =1, description = "Change currency and validate it")
     public void testCurrencyChange() {
 
-        localizationSteps
+        commonSteps
+                .clickDestinationSearchBar()
+                .chooseFirstDestination()
+                .pickDates(CHECK_IN_DATE, CHECK_OUT_DATE)
+                .clickSearch()
                 .openCurrencyDropdown()
-                .selectCurrency(Constants.US_DOLLAR)
-                .verifyCurrency(Constants.USD);
+                .selectCurrency(Constants.US_DOLLAR);
+
+        offersSteps
+                .verifyCurrency(USD, PRICE_USD);
     }
 
-    @Feature("Language Switching")
-    @Story("User can change language")
-    @Test(priority = 2,description = "Verify that the user can successfully change the language on Booking.com")
+    @Feature("Localization")
+    @Story("Language Switching")
+    @Description("""
+            Verify that the user can successfully change the language on Booking.com
+            """)
+    @Test(priority = 2,description = "Change language and validate switching")
     public void testLanguageChange() {
-        localizationSteps
+        commonSteps
                 .openLanguageDropdown()
-                .selectLanguage(Constants.LANGUAGE)
-                .verifyLanguage(Constants.LANGUAGE);
+                .selectLanguage(Constants.LANGUAGE);
+        staysSteps
+                .verifyLanguage(LANGUAGE, DE);
     }
 
 }

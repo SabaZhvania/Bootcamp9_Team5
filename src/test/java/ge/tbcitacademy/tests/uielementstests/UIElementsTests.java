@@ -13,13 +13,16 @@ import static com.codeborne.selenide.Selenide.open;
 @Epic("Booking.com UI Tests")
 public class UIElementsTests extends ConfigTests {
     StaysSteps staysSteps;
+    CommonSteps commonSteps;
     OffersSteps offerSteps;
     FlightsSteps flightsSteps;
     CarRentalsSteps carRentalsSteps;
     SignInSteps signInSteps;
+
     @BeforeClass
     public void classSetup(){
         staysSteps = new StaysSteps();
+        commonSteps = new CommonSteps();
         offerSteps = new OffersSteps();
         flightsSteps = new FlightsSteps();
         carRentalsSteps = new CarRentalsSteps();
@@ -93,13 +96,13 @@ public class UIElementsTests extends ConfigTests {
                 .clickNavItem(Constants.FLIGHTS);
         flightsSteps
                 .validateFlightsPage();
-        staysSteps
+        commonSteps
                 .navigateBack();
         staysSteps
                 .clickNavItem(Constants.CAR_RENTALS);
         carRentalsSteps
                 .validateRentalsPage();
-        staysSteps
+        commonSteps
                 .navigateBack();
         staysSteps
                 .clickNavItem(Constants.STAYS);

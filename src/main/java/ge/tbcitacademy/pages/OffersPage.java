@@ -11,5 +11,6 @@ public class OffersPage extends CommonPage {
     public SelenideElement sortBtn = $(byAttribute("data-testid", "sorters-dropdown-trigger"));
     public ElementsCollection offers = $$(byAttribute("data-testid","property-card-container")),
                         offerAvailabilityButton = $$("a[data-testid='availability-cta-btn']"),
-                        popularFilters = $$("div[data-filters-group='popular'] div[data-filters-item]");
+                        popularFilters = $$("div[data-filters-group='popular'] div[data-filters-item]"),
+                        offersPrices = $$(byAttribute("data-testid", "price-and-discounted-price"));
 }
