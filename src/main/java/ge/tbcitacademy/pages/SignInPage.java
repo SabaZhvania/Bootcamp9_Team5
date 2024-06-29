@@ -7,8 +7,10 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class SignInPage {
-    public SelenideElement signInText = $(byText("Sign in or create an account")),
+public class SignInPage{
+    public SelenideElement passwordInput = $("#password"),
+    signInButton =$(byText("Sign in")) ,
     continueWithEmail = $("button[type='submit']");
-    public ElementsCollection socialBtns = $$(".access-panel__social-buttons a");
+
+
 }

@@ -21,6 +21,7 @@ public class ConfigTests {
         browser = CHROME;
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
+        options.addArguments("--disable-blink-features=AutomationControlled");
         Configuration.browserCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
         SelenideLogger.addListener("AllureSelenide", new ModdedAllureSelenide());
         browserSize = null;

@@ -3,26 +3,17 @@ package ge.tbcitacademy.steps;
 import ge.tbcitacademy.pages.SignInPage;
 import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.Condition.*;
-
 public class SignInSteps {
     SignInPage signInPage = new SignInPage();
 
-    @Step("Validate sign in text is displayed")
-    public SignInSteps validateSignInPage(){
-        signInPage.signInText.shouldBe(visible);
+    @Step("Enter password: {password}")
+    public SignInSteps enterPassword(String password) {
+        signInPage.passwordInput.setValue(password);
         return this;
     }
 
-    @Step("Validate continue with email is displayed")
-    public SignInSteps validateContinueWithEmail(){
-        signInPage.continueWithEmail.shouldHave(text("Continue with email")).shouldBe(visible);
-        return this;
-    }
-
-    @Step("Validate social buttons are displayed and clickable")
-    public SignInSteps validateSocialButtons(){
-        signInPage.socialBtns.forEach(b -> b.shouldBe(visible).shouldBe(clickable));
-        return this;
+    @Step("Click 'Sign In' button on sign-in page")
+    public void clickSignInButtonOnSignInPage() {
+        signInPage.signInButton.click();
     }
 }

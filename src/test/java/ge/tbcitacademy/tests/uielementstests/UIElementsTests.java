@@ -10,20 +10,21 @@ import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
 
-@Epic("Booking.com UI Tests")
+@Epic("UI Tests")
 public class UIElementsTests extends ConfigTests {
     StaysSteps staysSteps;
     OffersSteps offerSteps;
     FlightsSteps flightsSteps;
     CarRentalsSteps carRentalsSteps;
-    SignInSteps signInSteps;
+    SignInOrCreateSteps signInOrCreateSteps;
+
     @BeforeClass
     public void classSetup(){
         staysSteps = new StaysSteps();
         offerSteps = new OffersSteps();
         flightsSteps = new FlightsSteps();
         carRentalsSteps = new CarRentalsSteps();
-        signInSteps = new SignInSteps();
+        signInOrCreateSteps = new SignInOrCreateSteps();
     }
     @BeforeMethod
     public void testSetup(){
@@ -122,8 +123,8 @@ public class UIElementsTests extends ConfigTests {
     public void signInPageTest(){
         staysSteps
                 .clickSignInBtn();
-        signInSteps
-                .validateSignInPage()
+        signInOrCreateSteps
+                .validateSignInOrCreatePage()
                 .validateContinueWithEmail()
                 .validateSocialButtons();
     }
