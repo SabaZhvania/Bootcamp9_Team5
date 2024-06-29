@@ -19,7 +19,10 @@ public class Constants {
             CONFIG = "config.properties",
             GOOGLE_VALIDATION = "Google Sign-In page did not open.",
             EMAIL = "email",
-            PASSWORD = "password";
+            PASSWORD = "password",
+            US_DOLLAR = "U.S. Dollar",
+            USD = "USD",
+            LANGUAGE = "Deutsch";
 
 
     public static final LocalDate CHECK_IN_DATE = LocalDate.of(2024, 7, 8),
