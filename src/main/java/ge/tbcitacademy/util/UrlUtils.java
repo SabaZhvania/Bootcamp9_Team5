@@ -1,12 +1,18 @@
 package ge.tbcitacademy.util;
 
+import com.codeborne.selenide.WebDriverRunner;
 import org.testng.Assert;
+
+import java.time.Duration;
+
+import static com.codeborne.selenide.Selenide.Wait;
 
 public class UrlUtils {
 
-    public static void assertUrlContainsParameters(String url, String... parameters) {
+    public static void validateUrlContainsParameters(String... parameters) {
         for (String parameter : parameters) {
-            Assert.assertTrue(url.contains(parameter), parameter + " not found in URL: " + url);
+            Wait().withTimeout(Duration.ofSeconds(10))
+                    .until(driver -> WebDriverRunner.url().contains(parameter));
         }
     }
 }

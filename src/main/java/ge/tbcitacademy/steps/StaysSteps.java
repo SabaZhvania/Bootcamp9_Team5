@@ -89,9 +89,4 @@ public class StaysSteps extends CommonSteps {
         return this;
     }
 
-    @Step("Click sign in button")
-    public StaysSteps clickSignInBtn(){
-        staysPage.signInBtn.click();
-        return this;
-    }
 }

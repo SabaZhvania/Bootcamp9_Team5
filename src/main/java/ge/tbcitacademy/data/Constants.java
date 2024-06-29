@@ -17,7 +17,6 @@ public class Constants {
             AUTH_SUCCESS = "auth_success=1",
             ACCOUNT_CREATED = "account_created=1",
             CONFIG = "config.properties",
-            GOOGLE_VALIDATION = "Google Sign-In page did not open.",
             EMAIL = "email",
             PASSWORD = "password";
 

@@ -44,9 +44,13 @@ public class CommonSteps {
         return this;
     }
 
-    @Step("sss")
-    public CommonSteps clickSignInButton(){
+    @Step("Click Sign in button at the top of the page")
+    public void clickSignInBtn(){
         commonPage.signInBtn.shouldBe(visible).click();
-        return this;
+    }
+
+    @Step("Click 'Register' button")
+    public void clickRegisterButton() {
+        commonPage.registerBtn.click();
     }
 }

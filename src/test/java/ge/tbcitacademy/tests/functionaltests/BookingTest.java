@@ -1,25 +1,16 @@
 package ge.tbcitacademy.tests.functionaltests;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
 import ge.tbcitacademy.configtests.ConfigTests;
-import ge.tbcitacademy.listeners.CustomTestListener;
 import ge.tbcitacademy.steps.*;
-import ge.tbcitacademy.util.ModdedAllureSelenide;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
-import org.openqa.selenium.chrome.ChromeOptions;
+import io.qameta.allure.*;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Browsers.CHROME;
 import static com.codeborne.selenide.Selenide.open;
 import static ge.tbcitacademy.data.Constants.*;
 
-@Epic("Functional Test")
+@Epic("Functional Tests")
 public class BookingTest extends ConfigTests {
     StaysSteps staysSteps;
     OffersSteps offersSteps;
@@ -43,10 +34,12 @@ public class BookingTest extends ConfigTests {
 
     @Feature("Booking Process")
     @Story("Booking without card info")
-    @Test(testName = "Hotel booking and payment", description = """
+    @Description("""
             This test case simulates user choosing destination, check-in&out dates and picking first offer.
             User fills personal details, but doesn't provide card info, so he/she gets appropriate error messages.
             """)
+    @Severity(SeverityLevel.BLOCKER)
+    @Test(description = "Hotel booking and payment")
     public void bookingAndPaymentTest(){
         staysSteps.validatePageLoad()
                 .closeSignInPopUp()
