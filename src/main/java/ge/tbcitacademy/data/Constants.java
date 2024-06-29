@@ -18,7 +18,12 @@ public class Constants {
             ACCOUNT_CREATED = "account_created=1",
             CONFIG = "config.properties",
             EMAIL = "email",
-            PASSWORD = "password";
+            PASSWORD = "password",
+            US_DOLLAR = "U.S. Dollar",
+            USD = "USD",
+            PRICE_USD = "US$",
+            LANGUAGE = "Deutsch",
+            DE = "de";
 
 
     public static final LocalDate CHECK_IN_DATE = LocalDate.of(2024, 7, 8),

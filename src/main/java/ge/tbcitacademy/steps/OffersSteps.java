@@ -38,4 +38,10 @@ public class OffersSteps {
         offersPage.sortBtn.shouldBe(visible).shouldBe(clickable);
         return this;
     }
+
+    @Step("Verify selected currency: {expectedCurrency}")
+    public void verifyCurrency(String expectedCurrency, String expectedCurrencyPriceFormat) {
+        offersPage.currencyButton.shouldHave(text(expectedCurrency));
+        offersPage.offersPrices.first().shouldHave(partialText(expectedCurrencyPriceFormat));
+    }
 }

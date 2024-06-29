@@ -6,6 +6,7 @@ import io.qameta.allure.Step;
 
 import java.time.LocalDate;
 
+import static com.codeborne.selenide.Condition.clickable;
 import static com.codeborne.selenide.Condition.visible;
 
 public class CommonSteps {
@@ -13,7 +14,7 @@ public class CommonSteps {
     
     @Step("Click on the destinations search bar")
     public CommonSteps clickDestinationSearchBar() {
-        commonPage.destinationSearchBar.click();
+        commonPage.destinationSearchBar.shouldBe(clickable).click();
         return this;
     }
 
@@ -34,8 +35,9 @@ public class CommonSteps {
     }
 
     @Step("Click on the 'Search' button")
-    public void clickSearch(){
+    public CommonSteps clickSearch(){
         commonPage.searchButton.click();
+        return this;
     }
 
     @Step("Navigate to previous page")
@@ -52,5 +54,29 @@ public class CommonSteps {
     @Step("Click 'Register' button")
     public void clickRegisterButton() {
         commonPage.registerBtn.click();
+    }
+
+    @Step("Open currency dropdown")
+    public CommonSteps openCurrencyDropdown() {
+        commonPage.currencyButton.shouldBe(visible).click();
+        return this;
+    }
+
+    @Step("Select currency: {currency}")
+    public CommonSteps selectCurrency(String currency) {
+        commonPage.currencyOption(currency).shouldBe(visible).click();
+        return this;
+    }
+
+    @Step("Open language dropdown")
+    public CommonSteps openLanguageDropdown() {
+        commonPage.languageSwitcherBtn.shouldBe(visible).click();
+        return this;
+    }
+
+    @Step("Select language: {language}")
+    public CommonSteps selectLanguage(String language) {
+        commonPage.languageOption(language).shouldBe(visible).click();
+        return this;
     }
 }

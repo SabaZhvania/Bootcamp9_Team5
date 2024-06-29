@@ -6,6 +6,7 @@
             <class name="ge.tbcitacademy.tests.uielementstests.UIElementsTests"/>
             <class name="ge.tbcitacademy.tests.functionaltests.BookingTest"/>
             <class name="ge.tbcitacademy.tests.functionaltests.AuthorizationTests"/>
+            <class name="ge.tbcitacademy.tests.functionaltests.LocalizationTests"/>
         </classes>
     </test>
 </suite>

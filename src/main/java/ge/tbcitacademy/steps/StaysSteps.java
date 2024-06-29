@@ -7,12 +7,14 @@ import com.codeborne.selenide.ex.ElementNotFound;
 import ge.tbcitacademy.data.Constants;
 import ge.tbcitacademy.pages.StaysPage;
 import io.qameta.allure.Step;
+import me.champeau.ld.UberLanguageDetector;
 import org.openqa.selenium.NoSuchElementException;
+import org.testng.Assert;
 
 import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 
-public class StaysSteps extends CommonSteps {
+public class StaysSteps {
     StaysPage staysPage = new StaysPage();
 
     @Step("Wait for page to load")
@@ -89,4 +91,12 @@ public class StaysSteps extends CommonSteps {
         return this;
     }
 
+    @Step("Verify selected language: {expectedLanguage}")
+    public void verifyLanguage(String expectedLanguage, String countryCode) {
+        String expectedAriaLabel = "Sprache: " + expectedLanguage;
+        staysPage.languageSwitcherBtn.shouldHave(attribute("aria-label", expectedAriaLabel));
+
+        UberLanguageDetector detector = UberLanguageDetector.getInstance();
+        Assert.assertEquals(detector.detectLang(staysPage.promotionalOffersHeaderText.getText()), countryCode);
+    }
 }

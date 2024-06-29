@@ -4,10 +4,7 @@ package ge.tbcitacademy.tests.functionaltests;
 import com.github.javafaker.Faker;
 import ge.tbcitacademy.configtests.ConfigTests;
 import ge.tbcitacademy.data.Constants;
-import ge.tbcitacademy.steps.RegistrationSteps;
-import ge.tbcitacademy.steps.SignInOrCreateSteps;
-import ge.tbcitacademy.steps.SignInSteps;
-import ge.tbcitacademy.steps.StaysSteps;
+import ge.tbcitacademy.steps.*;
 import ge.tbcitacademy.util.UrlUtils;
 import io.qameta.allure.*;
 import org.slf4j.Logger;
@@ -29,6 +26,7 @@ public class AuthorizationTests extends ConfigTests {
     RegistrationSteps registrationSteps;
     SignInSteps signInSteps;
     StaysSteps staysSteps;
+    CommonSteps commonSteps;
     Faker faker;
 
     @BeforeClass
@@ -37,6 +35,7 @@ public class AuthorizationTests extends ConfigTests {
         registrationSteps = new RegistrationSteps();
         staysSteps = new StaysSteps();
         signInSteps = new SignInSteps();
+        commonSteps = new CommonSteps();
         faker = new Faker();
     }
 
@@ -57,7 +56,7 @@ public class AuthorizationTests extends ConfigTests {
     @Severity(SeverityLevel.CRITICAL)
     @Test(priority = 1, description = "User registration")
     public void registrationTest() {
-        staysSteps
+        commonSteps
                 .clickRegisterButton();
 
         signInOrCreateSteps
@@ -97,7 +96,8 @@ public class AuthorizationTests extends ConfigTests {
         String email = props.getProperty(Constants.EMAIL);
         String password = props.getProperty(Constants.PASSWORD);
 
-        staysSteps.clickSignInBtn();
+        commonSteps
+                .clickSignInBtn();
         signInOrCreateSteps
                 .enterEmail(email)
                 .clickContinueBtn();

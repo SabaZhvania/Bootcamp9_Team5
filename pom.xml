@@ -51,6 +51,13 @@
             <artifactId>javafaker</artifactId>
             <version>1.0.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>me.champeau.jlangdetect</groupId>
+            <artifactId>jlangdetect-extra</artifactId>
+            <version>0.6</version>
+        </dependency>
+
     </dependencies>
 
     <build>
