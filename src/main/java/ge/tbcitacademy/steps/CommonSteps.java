@@ -46,6 +46,16 @@ public class CommonSteps {
         return this;
     }
 
+    @Step("Click Sign in button at the top of the page")
+    public void clickSignInBtn(){
+        commonPage.signInBtn.shouldBe(visible).click();
+    }
+
+    @Step("Click 'Register' button")
+    public void clickRegisterButton() {
+        commonPage.registerBtn.click();
+    }
+
     @Step("Open currency dropdown")
     public CommonSteps openCurrencyDropdown() {
         commonPage.currencyButton.shouldBe(visible).click();

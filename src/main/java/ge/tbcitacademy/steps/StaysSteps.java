@@ -1,6 +1,8 @@
 package ge.tbcitacademy.steps;
 
 import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Selenide;
+
 import com.codeborne.selenide.ex.ElementNotFound;
 import ge.tbcitacademy.data.Constants;
 import ge.tbcitacademy.pages.StaysPage;
@@ -10,7 +12,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 
 import java.time.Duration;
-
 import static com.codeborne.selenide.Condition.*;
 
 public class StaysSteps {
@@ -87,12 +88,6 @@ public class StaysSteps {
     @Step("Click navigation item")
     public StaysSteps clickNavItem(String text){
         staysPage.navLinks.filter(text(text)).get(0).click();
-        return this;
-    }
-
-    @Step("Click sign in button")
-    public StaysSteps clickSignInBtn(){
-        staysPage.signInBtn.click();
         return this;
     }
 

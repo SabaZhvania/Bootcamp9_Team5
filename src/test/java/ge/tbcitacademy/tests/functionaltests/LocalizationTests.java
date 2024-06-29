@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 import static com.codeborne.selenide.Selenide.open;
 import static ge.tbcitacademy.data.Constants.*;
 
-@Epic("Functional Test")
+@Epic("Functional Tests")
 public class LocalizationTests extends ConfigTests {
     StaysSteps staysSteps;
     OffersSteps offersSteps;
