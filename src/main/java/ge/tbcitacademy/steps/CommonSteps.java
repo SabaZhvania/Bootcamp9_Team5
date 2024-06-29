@@ -43,4 +43,10 @@ public class CommonSteps {
         Selenide.back();
         return this;
     }
+
+    @Step("sss")
+    public CommonSteps clickSignInButton(){
+        commonPage.signInBtn.shouldBe(visible).click();
+        return this;
+    }
 }
