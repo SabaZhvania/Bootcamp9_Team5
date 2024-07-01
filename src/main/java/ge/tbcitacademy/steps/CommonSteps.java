@@ -1,6 +1,7 @@
 package ge.tbcitacademy.steps;
 
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.ex.ElementNotFound;
 import ge.tbcitacademy.pages.CommonPage;
 import io.qameta.allure.Step;
 
@@ -11,11 +12,28 @@ import static com.codeborne.selenide.Condition.visible;
 
 public class CommonSteps {
     CommonPage commonPage = new CommonPage();
-    
+
+    @Step("Close Genius membership popup if it appears")
+    public CommonSteps closeGeniusPopup() {
+        try{
+            commonPage.geniusPopUpCloseBtn.shouldBe(visible).click();
+        }
+        catch(ElementNotFound ignored){}
+        return this;
+    }
+
     @Step("Click on the destinations search bar")
     public CommonSteps clickDestinationSearchBar() {
         commonPage.destinationSearchBar.shouldBe(clickable).click();
         return this;
+    }
+
+    @Step("Accepts cookies offered by the website")
+    public void acceptCookies() {
+        try{
+            commonPage.cookieAcceptBtn.shouldBe(clickable).click();
+        }
+        catch(ElementNotFound ignored){}
     }
 
     @Step("Choose first offered destination")

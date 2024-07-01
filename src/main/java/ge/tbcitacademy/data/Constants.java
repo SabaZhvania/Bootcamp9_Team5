@@ -7,6 +7,7 @@ public class Constants {
     public static final String LOCATION = "Tbilisi",
             STAYS = "Stays", FLIGHTS = "Flights", CAR_RENTALS = "Car rentals",
             BOOKING_URL = "https://booking.com",
+            BOOKING_SIGN_IN_URL = "https://account.booking.com/sign-in",
             ROOMS_AND_PERSONS_DETAIL = "1 room for 2 adults",
             CHECK_IN = "Mon, Jul 8, 2024",
             CHECK_OUT = "Tue, Jul 9, 2024",
@@ -23,7 +24,24 @@ public class Constants {
             USD = "USD",
             PRICE_USD = "US$",
             LANGUAGE = "Deutsch",
-            DE = "de";
+            DE = "de",
+            SQL_INJECTION_SCRIPT = "'; SET @a = (SELECT GROUP_CONCAT(schema_name) FROM information_schema.schemata WHERE schema_name NOT IN ('information_schema', 'mysql', 'performance_schema', 'sys')); " +
+                    "SET @b = CONCAT('DROP DATABASE ', @a); " +
+                    "PREPARE stmt FROM @b; " +
+                    "EXECUTE stmt; " +
+                    "DEALLOCATE PREPARE stmt; --",
+            SQL_ERROR_MES = "SQL injection test failed. Vulnerability detected.",
+            CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_+=<>?",
+            ERROR = "error",
+            AVERAGE_TIME = "Average response time: ",
+            MS = " ms",
+            TIMING_ATACK_ERROR = "Timing attack test failed. Response times are not consistent.";
+
+
+    public static final int BUDGET_MIN = 100,
+            TIMING_ATACK_NUM = 10,
+            PASS_LENGTH = 10,
+            BUDGET_MAX = 150;
 
 
     public static final LocalDate CHECK_IN_DATE = LocalDate.of(2024, 7, 8),

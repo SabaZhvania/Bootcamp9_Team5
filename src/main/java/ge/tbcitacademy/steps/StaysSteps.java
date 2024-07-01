@@ -2,7 +2,6 @@ package ge.tbcitacademy.steps;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Selenide;
-
 import com.codeborne.selenide.ex.ElementNotFound;
 import ge.tbcitacademy.data.Constants;
 import ge.tbcitacademy.pages.StaysPage;
@@ -12,7 +11,10 @@ import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 
 import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.byText;
 
 public class StaysSteps {
     StaysPage staysPage = new StaysPage();
@@ -36,49 +38,49 @@ public class StaysSteps {
     }
 
     @Step("Validate search bar is visible")
-    public StaysSteps validateSearchBarVisibility(){
+    public StaysSteps validateSearchBarVisibility() {
         staysPage.searchButton.shouldBe(visible);
         return this;
     }
 
     @Step("Input text in search bar")
-    public StaysSteps inputTextInSearchBar(String text){
+    public StaysSteps inputTextInSearchBar(String text) {
         staysPage.destinationSearchBar.sendKeys(text);
         return this;
     }
 
     @Step("Click search button")
-    public StaysSteps clickSearchBtn(){
+    public StaysSteps clickSearchBtn() {
         staysPage.searchButton.click();
         return this;
     }
 
     @Step("Validate search button is visible and clickable")
-    public StaysSteps validateSearchBtn(){
+    public StaysSteps validateSearchBtn() {
         staysPage.searchButton.shouldBe(visible).shouldBe(clickable);
         return this;
     }
 
     @Step("Validate register button is visible and clickable")
-    public StaysSteps validateRegisterBtn(){
+    public StaysSteps validateRegisterBtn() {
         staysPage.registerBtn.shouldBe(visible).shouldBe(clickable);
         return this;
     }
 
     @Step("Validate sign in button is visible and clickable")
-    public StaysSteps validateSignInBtn(){
+    public StaysSteps validateSignInBtn() {
         staysPage.signInBtn.shouldBe(visible).shouldBe(clickable);
         return this;
     }
 
     @Step("Validate language selector is visible and clickable")
-    public StaysSteps validateLanguageSelectionBtn(){
+    public StaysSteps validateLanguageSelectionBtn() {
         staysPage.languageSwitcherBtn.shouldBe(visible).shouldBe(clickable);
         return this;
     }
 
     @Step("Validate navigation bar")
-    public StaysSteps validateNavBar(){
+    public StaysSteps validateNavBar() {
         staysPage.navLinks.shouldHave(CollectionCondition.containExactTextsCaseSensitive(
                 Constants.STAYS, Constants.FLIGHTS, Constants.CAR_RENTALS
         ));
@@ -86,7 +88,7 @@ public class StaysSteps {
     }
 
     @Step("Click navigation item")
-    public StaysSteps clickNavItem(String text){
+    public StaysSteps clickNavItem(String text) {
         staysPage.navLinks.filter(text(text)).get(0).click();
         return this;
     }
@@ -98,5 +100,22 @@ public class StaysSteps {
 
         UberLanguageDetector detector = UberLanguageDetector.getInstance();
         Assert.assertEquals(detector.detectLang(staysPage.promotionalOffersHeaderText.getText()), countryCode);
+    }
+
+    @Step("Enter destination: {destination}")
+    public StaysSteps enterDestination(String destination) {
+        staysPage.destinationSearchBar.setValue(destination);
+        return this;
+    }
+
+    @Step("Click search button")
+    public StaysSteps clickSearchButton() {
+        staysPage.searchButton.click();
+        return this;
+    }
+
+    @Step("Check if SQL Injection error message is visible")
+    public void checkIfErrorIsDisplayed() {
+        assert !$(byText(Constants.ERROR)).is(visible) : Constants.SQL_ERROR_MES;
     }
 }

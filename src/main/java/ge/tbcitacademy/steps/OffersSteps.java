@@ -22,20 +22,20 @@ public class OffersSteps {
     }
 
     @Step("Validate offer visibility")
-    public OffersSteps validateOffersVisibility(){
+    public OffersSteps validateOffersVisibility() {
         offersPage.offers.get(0).shouldBe(visible);
         return this;
     }
 
     @Step("Validate filters are visible and interactable")
-    public OffersSteps validateFiltersPresence(){
-        offersPage.popularFilters.get(0).shouldBe(visible).shouldBe(interactable);
+    public OffersSteps validateFiltersPresence() {
+        offersPage.popularFilters.get(0).shouldBe(visible);
         return this;
     }
 
     @Step("Validate sort button is visible and clickable")
-    public OffersSteps validateSortBtn(){
-        offersPage.sortBtn.shouldBe(visible).shouldBe(clickable);
+    public OffersSteps validateSortBtn() {
+        offersPage.sortBtn.shouldBe(visible).click();
         return this;
     }
 

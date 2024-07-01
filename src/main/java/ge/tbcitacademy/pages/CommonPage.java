@@ -1,6 +1,7 @@
 package ge.tbcitacademy.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
 
 import java.time.LocalDate;
 
@@ -17,7 +18,9 @@ public class CommonPage {
                             languageSwitcherBtn = $(byAttribute("data-testid", "header-language-picker-trigger")),
                             datePickerTab = $("nav[data-testid='datepicker-tabs']"),
                             searchButton = $("button[type='submit']"),
-                            currencyButton = $("[data-testid='header-currency-picker-trigger']");
+                            currencyButton = $("[data-testid='header-currency-picker-trigger']"),
+                            geniusPopUpCloseBtn = $(byAttribute("aria-label","Dismiss sign-in info.")),
+                            cookieAcceptBtn = $(By.id("onetrust-accept-btn-handler"));
 
     public SelenideElement languageOption(String language) {
         return $(byText(language));
