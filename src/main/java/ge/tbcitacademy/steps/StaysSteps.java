@@ -1,8 +1,6 @@
 package ge.tbcitacademy.steps;
 
 import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.Selenide;
-
 import com.codeborne.selenide.ex.ElementNotFound;
 import ge.tbcitacademy.data.Constants;
 import ge.tbcitacademy.pages.StaysPage;
@@ -12,7 +10,13 @@ import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.time.LocalDate;
+
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static ge.tbcitacademy.data.Constants.NO_POPUP_MSG;
+import static ge.tbcitacademy.data.Constants.SQL_INJECTION_SCRIPT;
 
 public class StaysSteps {
     StaysPage staysPage = new StaysPage();
@@ -27,58 +31,50 @@ public class StaysSteps {
     @Step("Close the sign in or register pop up")
     public StaysSteps closeSignInPopUp() {
         try {
-            staysPage.signInPopUpCloseButton.shouldBe(visible, Duration.ofSeconds(3));
-            staysPage.signInPopUpCloseButton.click();
+            staysPage.signInPopUpCloseButton.shouldBe(visible, Duration.ofSeconds(3)).click();
         } catch (NoSuchElementException | ElementNotFound e) {
-            System.out.println("No pop up detected");
+            System.out.println(NO_POPUP_MSG);
         }
         return this;
     }
 
     @Step("Validate search bar is visible")
-    public StaysSteps validateSearchBarVisibility(){
+    public StaysSteps validateSearchBarVisibility() {
         staysPage.searchButton.shouldBe(visible);
         return this;
     }
 
-    @Step("Input text in search bar")
-    public StaysSteps inputTextInSearchBar(String text){
-        staysPage.destinationSearchBar.sendKeys(text);
-        return this;
-    }
-
     @Step("Click search button")
-    public StaysSteps clickSearchBtn(){
+    public StaysSteps clickSearchBtn() {
         staysPage.searchButton.click();
         return this;
     }
 
     @Step("Validate search button is visible and clickable")
-    public StaysSteps validateSearchBtn(){
+    public StaysSteps validateSearchBtn() {
         staysPage.searchButton.shouldBe(visible).shouldBe(clickable);
         return this;
     }
 
     @Step("Validate register button is visible and clickable")
-    public StaysSteps validateRegisterBtn(){
+    public StaysSteps validateRegisterBtn() {
         staysPage.registerBtn.shouldBe(visible).shouldBe(clickable);
         return this;
     }
 
     @Step("Validate sign in button is visible and clickable")
-    public StaysSteps validateSignInBtn(){
+    public StaysSteps validateSignInBtn() {
         staysPage.signInBtn.shouldBe(visible).shouldBe(clickable);
         return this;
     }
 
     @Step("Validate language selector is visible and clickable")
-    public StaysSteps validateLanguageSelectionBtn(){
+    public void validateLanguageBtn() {
         staysPage.languageSwitcherBtn.shouldBe(visible).shouldBe(clickable);
-        return this;
     }
 
     @Step("Validate navigation bar")
-    public StaysSteps validateNavBar(){
+    public StaysSteps validateNavBar() {
         staysPage.navLinks.shouldHave(CollectionCondition.containExactTextsCaseSensitive(
                 Constants.STAYS, Constants.FLIGHTS, Constants.CAR_RENTALS
         ));
@@ -86,7 +82,7 @@ public class StaysSteps {
     }
 
     @Step("Click navigation item")
-    public StaysSteps clickNavItem(String text){
+    public StaysSteps clickNavItem(String text) {
         staysPage.navLinks.filter(text(text)).get(0).click();
         return this;
     }
@@ -98,5 +94,45 @@ public class StaysSteps {
 
         UberLanguageDetector detector = UberLanguageDetector.getInstance();
         Assert.assertEquals(detector.detectLang(staysPage.promotionalOffersHeaderText.getText()), countryCode);
+    }
+
+    @Step("Check if SQL Injection error message is visible")
+    public void checkIfErrorIsDisplayed() {
+        assert !$(byText(Constants.ERROR)).is(visible) : Constants.SQL_ERROR_MES;
+    }
+
+    @Step("Click on the destinations search bar")
+    public StaysSteps clickDestinationSearchBar() {
+        staysPage.destinationSearchBar.shouldBe(clickable).click();
+        return this;
+    }
+
+    @Step("Choose first offered destination")
+    public StaysSteps chooseFirstDestination() {
+        staysPage.firstDestination.click();
+        return this;
+    }
+
+    @Step("Pick stay dates")
+    public StaysSteps pickDates(LocalDate startDate, LocalDate endDate){
+        if (!staysPage.datePickerTab.is(visible)) {
+            staysPage.datePickerSearchBar.click();
+        }
+        staysPage.date(startDate).click();
+        staysPage.date(endDate).click();
+        return this;
+    }
+
+    @Step("Enter destination: {destination}")
+    public StaysSteps enterDestination(String destination) {
+        staysPage.destinationSearchBar.sendKeys(destination);
+        staysPage.firstDestination.shouldHave(text(destination));
+        return this;
+    }
+
+    @Step("Inject SQL Script")
+    public StaysSteps injectSQL() {
+        staysPage.destinationSearchBar.sendKeys(SQL_INJECTION_SCRIPT);
+        return this;
     }
 }

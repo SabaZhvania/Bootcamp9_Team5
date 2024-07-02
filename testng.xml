@@ -7,6 +7,8 @@
             <class name="ge.tbcitacademy.tests.functionaltests.BookingTest"/>
             <class name="ge.tbcitacademy.tests.functionaltests.AuthorizationTests"/>
             <class name="ge.tbcitacademy.tests.functionaltests.LocalizationTests"/>
+            <class name="ge.tbcitacademy.tests.functionaltests.FilterTests"/>
+            <class name="ge.tbcitacademy.tests.security.SecurityTests"/>
         </classes>
     </test>
 </suite>

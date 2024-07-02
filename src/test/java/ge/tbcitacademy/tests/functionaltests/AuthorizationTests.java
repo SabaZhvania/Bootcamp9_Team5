@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import static com.codeborne.selenide.Selenide.open;
+import static ge.tbcitacademy.data.Constants.*;
 
 @Epic("Functional Tests")
 public class AuthorizationTests extends ConfigTests {
@@ -41,7 +42,7 @@ public class AuthorizationTests extends ConfigTests {
 
     @BeforeMethod
     public void beforeMethod(){
-        open(Constants.BOOKING_URL);
+        open(BOOKING_URL);
         staysSteps
                 .validatePageLoad()
                 .closeSignInPopUp();
@@ -75,7 +76,7 @@ public class AuthorizationTests extends ConfigTests {
                 .fillPasswords(faker.internet().password(10, 15, true, true))
                 .clickCreateAccountButton();
 
-        UrlUtils.validateUrlContainsParameters(Constants.AUTH_SUCCESS, Constants.ACCOUNT_CREATED);
+        UrlUtils.validateUrlContainsParameters(AUTH_SUCCESS, ACCOUNT_CREATED);
     }
 
     @Feature("Authorization")
@@ -87,20 +88,22 @@ public class AuthorizationTests extends ConfigTests {
     @Test(priority = 2, description = "User Sign in")
     public void signInTest() {
         Properties props = new Properties();
-        try (InputStream input = AuthorizationTests.class.getClassLoader().getResourceAsStream(Constants.CONFIG)) {
+        try (InputStream input = AuthorizationTests.class.getClassLoader().getResourceAsStream(CONFIG)) {
             props.load(input);
         } catch (IOException ex) {
-            LOGGER.error("Error loading properties file: ", ex);
+            LOGGER.error(ERROR_LOADING_FILE, ex);
         }
 
-        String email = props.getProperty(Constants.EMAIL);
-        String password = props.getProperty(Constants.PASSWORD);
+        String email = props.getProperty(EMAIL);
+        String password = props.getProperty(PASSWORD);
 
         commonSteps
                 .clickSignInBtn();
+
         signInOrCreateSteps
                 .enterEmail(email)
                 .clickContinueBtn();
+
         signInSteps
                 .enterPassword(password)
                 .clickSignInButtonOnSignInPage();

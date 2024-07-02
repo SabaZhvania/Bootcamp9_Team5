@@ -9,8 +9,7 @@ public class FlightsSteps {
     FlightsPage flightsPage = new FlightsPage();
 
     @Step("Validate flights page is displayed")
-    public FlightsSteps validateFlightsPage(){
+    public void validateFlightsPage(){
         flightsPage.title.shouldBe(visible);
-        return this;
     }
 }

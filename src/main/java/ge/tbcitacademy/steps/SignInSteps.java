@@ -8,6 +8,7 @@ public class SignInSteps {
 
     @Step("Enter password: {password}")
     public SignInSteps enterPassword(String password) {
+        signInPage.passwordInput.clear();
         signInPage.passwordInput.setValue(password);
         return this;
     }

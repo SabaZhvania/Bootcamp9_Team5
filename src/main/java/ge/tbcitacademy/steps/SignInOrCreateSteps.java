@@ -57,8 +57,7 @@ public class SignInOrCreateSteps {
     }
 
     @Step("Validate social buttons are displayed and clickable")
-    public SignInOrCreateSteps validateSocialButtons(){
+    public void validateSocialButtons(){
         page.socialBtns.forEach(b -> b.shouldBe(visible).shouldBe(clickable));
-        return this;
     }
 }

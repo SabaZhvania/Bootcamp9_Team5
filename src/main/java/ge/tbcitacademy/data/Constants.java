@@ -4,12 +4,13 @@ import java.time.LocalDate;
 
 public class Constants {
 
-    public static final String LOCATION = "Tbilisi",
+    public static final String TBILISI = "Tbilisi",
             STAYS = "Stays", FLIGHTS = "Flights", CAR_RENTALS = "Car rentals",
             BOOKING_URL = "https://booking.com",
+            BOOKING_SIGN_IN_URL = "https://account.booking.com/sign-in",
             ROOMS_AND_PERSONS_DETAIL = "1 room for 2 adults",
-            CHECK_IN = "Mon, Jul 8, 2024",
-            CHECK_OUT = "Tue, Jul 9, 2024",
+            CHECK_IN = "Thu, Aug 8, 2024",
+            CHECK_OUT = "Fri, Aug 9, 2024",
             CVC_ERROR_MSG = "Enter your 3 or 4-digit security code",
             EXPIRATION_ERROR_MSG = "Your card has to have a valid expiration date",
             CARD_N_ERROR_MSG = "Card number not valid",
@@ -23,9 +24,26 @@ public class Constants {
             USD = "USD",
             PRICE_USD = "US$",
             LANGUAGE = "Deutsch",
-            DE = "de";
+            DE = "de",
+            SQL_INJECTION_SCRIPT = "'; SET @a = (SELECT GROUP_CONCAT(schema_name) FROM information_schema.schemata WHERE schema_name NOT IN ('information_schema', 'mysql', 'performance_schema', 'sys')); " +
+                    "SET @b = CONCAT('DROP DATABASE ', @a); " +
+                    "PREPARE stmt FROM @b; " +
+                    "EXECUTE stmt; " +
+                    "DEALLOCATE PREPARE stmt; --",
+            SQL_ERROR_MES = "SQL injection test failed. Vulnerability detected.",
+            ERROR = "error",
+            MS = " ms",
+            TIMING_ATACK_ERROR = "Timing attack test failed. Response times are not consistent.",
+            ERROR_LOADING_FILE = "Error loading properties file: ",
+            NO_POPUP_MSG = "No pop up detected",
+            DIALOG_KOKHTA = "Dialog Kokhta";
 
 
-    public static final LocalDate CHECK_IN_DATE = LocalDate.of(2024, 7, 8),
-            CHECK_OUT_DATE = LocalDate.of(2024, 7, 9);
+    public static final int BUDGET_MIN = 100,
+            TIMING_ATACK_NUM = 10,
+            BUDGET_MAX = 150;
+
+
+    public static final LocalDate CHECK_IN_DATE = LocalDate.of(2024, 8, 8),
+            CHECK_OUT_DATE = LocalDate.of(2024, 8, 9);
 }
