@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
+import static ge.tbcitacademy.data.Constants.*;
 
 @Epic("UI Tests")
 public class UIElementsTests extends ConfigTests {
@@ -52,7 +53,7 @@ public class UIElementsTests extends ConfigTests {
                 .validateSearchBtn()
                 .validateRegisterBtn()
                 .validateSignInBtn()
-                .validateLanguageSelectionBtn();
+                .validateLanguageBtn();
     }
 
     @Test(description = "Search Result UI Test")
@@ -68,8 +69,7 @@ public class UIElementsTests extends ConfigTests {
     @Severity(SeverityLevel.BLOCKER)
     public void searchResultElementsTest(){
         staysSteps
-                .inputTextInSearchBar(Constants.LOCATION);
-        staysSteps
+                .enterDestination(TBILISI)
                 .clickSearchBtn();
         offerSteps
                 .validateOffersVisibility()
@@ -93,20 +93,19 @@ public class UIElementsTests extends ConfigTests {
     public void navigationBarTest(){
         staysSteps
                 .validateNavBar()
-                .clickNavItem(Constants.FLIGHTS);
+                .clickNavItem(FLIGHTS);
         flightsSteps
                 .validateFlightsPage();
         commonSteps
                 .navigateBack();
         staysSteps
-                .clickNavItem(Constants.CAR_RENTALS);
+                .clickNavItem(CAR_RENTALS);
         carRentalsSteps
                 .validateRentalsPage();
         commonSteps
                 .navigateBack();
         staysSteps
-                .clickNavItem(Constants.STAYS);
-        staysSteps
+                .clickNavItem(STAYS)
                 .validatePageLoad();
     }
 

@@ -34,9 +34,8 @@ public class OffersSteps {
     }
 
     @Step("Validate sort button is visible and clickable")
-    public OffersSteps validateSortBtn() {
-        offersPage.sortBtn.shouldBe(visible).click();
-        return this;
+    public void validateSortBtn() {
+        offersPage.sortBtn.shouldBe(allOf(visible, clickable));
     }
 
     @Step("Verify selected currency: {expectedCurrency}")

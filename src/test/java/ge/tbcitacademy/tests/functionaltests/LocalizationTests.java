@@ -44,15 +44,14 @@ public class LocalizationTests extends ConfigTests {
             """)
     @Test(priority =1, description = "Change currency and validate it")
     public void testCurrencyChange() {
-
-        commonSteps
+        staysSteps
                 .clickDestinationSearchBar()
                 .chooseFirstDestination()
                 .pickDates(CHECK_IN_DATE, CHECK_OUT_DATE)
-                .clickSearch()
+                .clickSearchBtn();
+        commonSteps
                 .openCurrencyDropdown()
                 .selectCurrency(Constants.US_DOLLAR);
-
         offersSteps
                 .verifyCurrency(USD, PRICE_USD);
     }

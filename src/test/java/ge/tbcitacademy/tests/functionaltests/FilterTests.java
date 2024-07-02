@@ -1,33 +1,44 @@
 package ge.tbcitacademy.tests.functionaltests;
 
 import ge.tbcitacademy.configtests.ConfigTests;
-import ge.tbcitacademy.steps.CommonSteps;
 import ge.tbcitacademy.steps.FilterSteps;
 import ge.tbcitacademy.steps.OffersSteps;
 import ge.tbcitacademy.steps.StaysSteps;
 import io.qameta.allure.*;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 
 import static com.codeborne.selenide.Selenide.open;
 import static ge.tbcitacademy.data.Constants.*;
 
 @Epic("Functional Tests")
 public class FilterTests extends ConfigTests {
-    CommonSteps commonSteps;
     StaysSteps staysSteps;
     FilterSteps filterSteps;
     OffersSteps offersSteps;
 
-    @BeforeMethod
-    public void setup() {
-        open("https://booking.com");
-        commonSteps = new CommonSteps();
+    @BeforeClass
+    public void beforeClass() {
         staysSteps = new StaysSteps();
         filterSteps = new FilterSteps();
         offersSteps = new OffersSteps();
-        commonSteps.acceptCookies();
+    }
+
+    @BeforeMethod
+    public void setup() {
+        open(BOOKING_URL);
+
+        staysSteps
+                .validatePageLoad()
+                .closeSignInPopUp()
+                .clickDestinationSearchBar()
+                .chooseFirstDestination()
+                .pickDates(CHECK_IN_DATE, CHECK_OUT_DATE)
+                .clickSearchBtn();
+
+        offersSteps
+                .validateOffersVisibility();
     }
 
 
@@ -45,14 +56,9 @@ public class FilterTests extends ConfigTests {
             This test ensures that users can filter search results by budget effectively.""")
     @Severity(SeverityLevel.CRITICAL)
     public void budgetFilterTest() {
-        commonSteps.clickDestinationSearchBar()
-                .closeGeniusPopup()
-                .chooseFirstDestination()
-                .pickDates(CHECK_IN_DATE, CHECK_OUT_DATE)
-                .clickSearch();
-
-        offersSteps.validateOffersVisibility();
-        filterSteps.setBudgetFilter(BUDGET_MIN, BUDGET_MAX);
+        filterSteps
+                .setBudgetFilter(BUDGET_MIN, BUDGET_MAX)
+                .validateBudgetFilter(BUDGET_MIN, BUDGET_MAX);
     }
 
     @Test(description = "Review Score Filter Test")
@@ -69,14 +75,8 @@ public class FilterTests extends ConfigTests {
             This test ensures that users can filter search results by review score effectively.""")
     @Severity(SeverityLevel.CRITICAL)
     public void reviewScoreFilterTest() {
-        commonSteps.clickDestinationSearchBar()
-                .chooseFirstDestination()
-                .pickDates(CHECK_IN_DATE,CHECK_OUT_DATE)
-                .clickSearch()
-                .closeGeniusPopup();
-
-        offersSteps.validateOffersVisibility();
-        filterSteps.setReviewScoreFilter()
+        filterSteps
+                .setReviewScoreFilterToWonderful()
                 .validateReviewScoreFilter();
     }
 
@@ -95,14 +95,8 @@ public class FilterTests extends ConfigTests {
             This test ensures that users can filter search results by property rating effectively.""")
     @Severity(SeverityLevel.CRITICAL)
     public void propertyRatingFilterTest() {
-        commonSteps.clickDestinationSearchBar()
-                .chooseFirstDestination()
-                .pickDates(CHECK_IN_DATE,CHECK_OUT_DATE)
-                .clickSearch();
-
-        offersSteps.validateOffersVisibility();
-        commonSteps.closeGeniusPopup();
-        filterSteps.setPropertyRatingFilter()
+        filterSteps
+                .setPropertyRatingFilterToFourStar()
                 .validatePropertyRatingFilter();
     }
 }

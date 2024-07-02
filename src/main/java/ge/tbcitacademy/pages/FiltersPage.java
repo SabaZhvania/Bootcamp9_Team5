@@ -8,13 +8,13 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class FiltersPage {
-    public SelenideElement min = $$(".d6ed9c72b9").first();
-    public SelenideElement max = $$(".d6ed9c72b9").last();
-    public SelenideElement minVal = $$(".e8499c6a5c .c3e951fba5").first();
-    public SelenideElement maxVal = $$(".e8499c6a5c .c3e951fba5").last();
-    public SelenideElement reviewScoreCheckbox = $(byText("Wonderful: 9+"));
-    public SelenideElement propertyRatingCheckbox = $(byText("4 stars"));
-    public ElementsCollection offerPrices = $$("div[data-testid='price-and-discounted-price']");
-    public ElementsCollection reviewScores = $$("div[data-testid='review-score']");
-    public ElementsCollection propertyRatings = $$("div[data-testid='rating']");
+    public SelenideElement min = $$(".e8499c6a5c .d6ed9c72b9").first(),
+            max = $$(".e8499c6a5c .d6ed9c72b9").last(),
+            minVal = $$(".e8499c6a5c .c3e951fba5").first(),
+            maxVal = $$(".e8499c6a5c .c3e951fba5").last(),
+            wonderfulReviewScoreCheckbox = $(byText("Wonderful: 9+")),
+            propertyRatingFourStarCheckbox = $(byText("4 stars"));
+    public ElementsCollection offerPrices = $$("div[data-testid='price-and-discounted-price']"),
+            reviewScores = $$("div[data-testid='review-score']"),
+            propertyRatings = $$("div[data-testid='rating']");
 }

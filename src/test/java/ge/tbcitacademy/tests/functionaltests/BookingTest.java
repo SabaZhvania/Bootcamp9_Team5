@@ -13,7 +13,6 @@ import static ge.tbcitacademy.data.Constants.*;
 @Epic("Functional Tests")
 public class BookingTest extends ConfigTests {
     StaysSteps staysSteps;
-    CommonSteps commonSteps;
     OffersSteps offersSteps;
     HotelSteps hotelSteps;
     BookingDetailsSteps detailsSteps;
@@ -25,12 +24,12 @@ public class BookingTest extends ConfigTests {
     @BeforeClass(alwaysRun = true)
     public void setup(){
         staysSteps = new StaysSteps();
-        commonSteps = new CommonSteps();
         offersSteps = new OffersSteps();
         hotelSteps = new HotelSteps();
         detailsSteps = new BookingDetailsSteps();
         finalDetailsSteps = new FinalDetailsSteps();
         faker = new Faker();
+
         open(BOOKING_URL);
     }
 
@@ -45,13 +44,10 @@ public class BookingTest extends ConfigTests {
     public void bookingAndPaymentTest(){
         staysSteps
                 .validatePageLoad()
-                .closeSignInPopUp();
-
-        commonSteps
-                .clickDestinationSearchBar()
-                .chooseFirstDestination()
+                .closeSignInPopUp()
+                .enterDestination(DIALOG_KOKHTA)
                 .pickDates(CHECK_IN_DATE, CHECK_OUT_DATE)
-                .clickSearch();
+                .clickSearchBtn();
 
         offersSteps
                 .pickFirstOffer()

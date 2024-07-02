@@ -10,8 +10,7 @@ public class CarRentalsSteps {
     CarRentalsPage carRentalsPage = new CarRentalsPage();
 
     @Step("Validate rentals page is displayed")
-    public CarRentalsSteps validateRentalsPage(){
+    public void validateRentalsPage(){
         carRentalsPage.rentalText.shouldBe(visible);
-        return this;
     }
 }
