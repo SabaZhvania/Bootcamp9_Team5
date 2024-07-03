@@ -52,6 +52,8 @@ jobs:
           project: 'e452c42c-77b8-40b1-af62-477ea0217739'
           definition: '6'
           buildVersionToDownload: 'latest'
+          allowPartiallySucceededBuilds: true
+          artifactName: 'allure-report'
           targetPath: '$(System.DefaultWorkingDirectory)/public'
         continueOnError: true
 
