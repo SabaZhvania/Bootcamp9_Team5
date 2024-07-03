@@ -44,10 +44,18 @@ jobs:
           mavenAuthenticateFeed: false
           effectivePomSkip: false
           sonarQubeRunAnalysis: false
+        continueOnError: true
 
       - script: |
           allure generate -c allure-results -o allure-report
         displayName: "Generate Report"
+
+      - task: PublishPipelineArtifact@1
+        displayName: "Publish Artifact"
+        inputs:
+          targetPath: 'allure-report'
+          artifact: 'allure-report'
+          publishLocation: 'pipeline'
 
       - task: PublishAllureReport@1
         displayName: "Publish Allure Report"
