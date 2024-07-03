@@ -45,7 +45,7 @@ public class BookingTest extends ConfigTests {
         staysSteps
                 .validatePageLoad()
                 .closeSignInPopUp()
-                .enterDestination(DIALOG_KOKHTA)
+                .enterDestination(BAKURIANI)
                 .pickDates(CHECK_IN_DATE, CHECK_OUT_DATE)
                 .clickSearchBtn();
 
@@ -54,9 +54,12 @@ public class BookingTest extends ConfigTests {
                 .switchWindow();
 
         hotelName = hotelSteps.getHotelName();
+
         hotelSteps.clickReserve();
-        price = hotelSteps.getReservationPrice();
+
         hotelSteps.clickIllReserve();
+
+        price = detailsSteps.getPrice();
 
         detailsSteps
                 .validateDetails(ROOMS_AND_PERSONS_DETAIL, CHECK_IN, CHECK_OUT)

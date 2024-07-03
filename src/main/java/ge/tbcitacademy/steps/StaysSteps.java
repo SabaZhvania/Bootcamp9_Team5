@@ -9,7 +9,6 @@ import me.champeau.ld.UberLanguageDetector;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 
-import java.time.Duration;
 import java.time.LocalDate;
 
 import static com.codeborne.selenide.Condition.*;
@@ -25,13 +24,14 @@ public class StaysSteps {
     public StaysSteps validatePageLoad() {
         staysPage.promotionalOffers.first().shouldBe(allOf(visible, clickable));
         staysPage.promotionalOffers.last().shouldBe(allOf(visible, clickable));
+        staysPage.helpBtn.should(appear);
         return this;
     }
 
     @Step("Close the sign in or register pop up")
     public StaysSteps closeSignInPopUp() {
         try {
-            staysPage.signInPopUpCloseButton.shouldBe(visible, Duration.ofSeconds(3)).click();
+            staysPage.signInPopUpCloseButton.should(appear).click();
         } catch (NoSuchElementException | ElementNotFound e) {
             System.out.println(NO_POPUP_MSG);
         }
@@ -47,6 +47,7 @@ public class StaysSteps {
     @Step("Click search button")
     public StaysSteps clickSearchBtn() {
         staysPage.searchButton.click();
+        closeSignInPopUp();
         return this;
     }
 

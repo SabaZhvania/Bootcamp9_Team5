@@ -14,16 +14,14 @@ public class HotelSteps {
     }
 
     @Step("Click the 'Reserve' button")
-    public void clickReserve() {
+    public HotelSteps clickReserve() {
         hotelPage.reserveButton.shouldBe(visible).click();
+        return this;
     }
 
-    @Step("Get hotel reservation price")
-    public String getReservationPrice() {
-        return hotelPage.reservationPrice.shouldBe(visible).getText();
-    }
     @Step("Click 'I'll reserve' button")
     public void clickIllReserve() {
-        hotelPage.iWillReserveButton.click();
+        hotelPage.reservationPrice.shouldBe(visible);
+        hotelPage.iWillReserveButton.shouldBe(allOf(visible, clickable)).click();
     }
 }

@@ -17,13 +17,13 @@ public class RegistrationSteps{
     @Step("Enter password: {password}")
     private void enterPassword(String password) {
         registrationPage.passwordInput.clear();
-        registrationPage.passwordInput.setValue(password);
+        registrationPage.passwordInput.sendKeys(password);
     }
 
     @Step("Confirm password: {password}")
     private void confirmPassword(String password) {
         registrationPage.confirmPasswordInput.clear();
-        registrationPage.confirmPasswordInput.setValue(password);
+        registrationPage.confirmPasswordInput.sendKeys(password);
     }
 
     @Step("Click 'Create Account' button")

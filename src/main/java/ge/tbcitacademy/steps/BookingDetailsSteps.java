@@ -46,4 +46,9 @@ public class BookingDetailsSteps {
     public void clickNext() {
         detailsPage.nextButton.scrollTo().shouldBe(visible).click();
     }
+
+    @Step("Get room price")
+    public String getPrice() {
+        return detailsPage.totalPrice.shouldBe(visible).innerText();
+    }
 }

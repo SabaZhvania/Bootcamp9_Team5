@@ -19,17 +19,51 @@ public class ConfigTests {
     @BeforeTest(alwaysRun = true)
     public void initialSetup(){
         browser = CHROME;
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        options.addArguments("--disable-blink-features=AutomationControlled");
+        ChromeOptions options;
+
+        String isAzureDevOps = System.getenv("TF_BUILD");
+
+        if (isAzureDevOps != null && isAzureDevOps.equalsIgnoreCase("true")) {
+            options = azureOptions();
+        } else {
+            options = localOptions();
+        }
+
         Configuration.browserCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
         SelenideLogger.addListener("AllureSelenide", new ModdedAllureSelenide());
-        browserSize = null;
         timeout = 20000;
         reopenBrowserOnFail = true;
         screenshots = true;
         fileDownload = FileDownloadMode.HTTPGET;
         pageLoadTimeout = 20000;
+    }
+
+    private static ChromeOptions localOptions() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments(
+                "--start-maximized",
+                "--disable-blink-features=AutomationControlled",
+                "--window-size=null"
+        );
+        return options;
+    }
+
+    private static ChromeOptions azureOptions() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments(
+                "--headless=new",
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+                "--window-size=1920,1080",
+                "--disable-extensions",
+                "--disable-infobars",
+                "--disable-gpu",
+                "--allow-insecure-localhost",
+                "--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3601.0 Safari/537.36",
+                "--disable-blink-features=AutomationControlled",
+                "--disable-animations"
+        );
+        return options;
     }
 
     @AfterMethod
