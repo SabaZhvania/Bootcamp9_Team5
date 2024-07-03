@@ -76,6 +76,9 @@ public class AuthorizationTests extends ConfigTests {
                 .fillPasswords(faker.internet().password(10, 15, true, true))
                 .clickCreateAccountButton();
 
+        staysSteps
+                .validatePageLoad();
+
         UrlUtils.validateUrlContainsParameters(AUTH_SUCCESS, ACCOUNT_CREATED);
     }
 
@@ -107,6 +110,9 @@ public class AuthorizationTests extends ConfigTests {
         signInSteps
                 .enterPassword(password)
                 .clickSignInButtonOnSignInPage();
+
+        staysSteps
+                .validatePageLoad();
 
         UrlUtils.validateUrlContainsParameters(Constants.AUTH_SUCCESS);
     }

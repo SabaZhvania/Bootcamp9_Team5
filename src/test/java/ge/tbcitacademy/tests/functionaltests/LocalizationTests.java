@@ -51,9 +51,9 @@ public class LocalizationTests extends ConfigTests {
                 .clickSearchBtn();
         commonSteps
                 .openCurrencyDropdown()
-                .selectCurrency(Constants.US_DOLLAR);
+                .selectCurrency(EURO);
         offersSteps
-                .verifyCurrency(USD, PRICE_USD);
+                .verifyCurrency(EUR, PRICE_EUR);
     }
 
     @Feature("Localization")
@@ -65,7 +65,7 @@ public class LocalizationTests extends ConfigTests {
     public void testLanguageChange() {
         commonSteps
                 .openLanguageDropdown()
-                .selectLanguage(Constants.LANGUAGE);
+                .selectLanguage(LANGUAGE);
         staysSteps
                 .verifyLanguage(LANGUAGE, DE);
     }

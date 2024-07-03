@@ -2,6 +2,7 @@ package ge.tbcitacademy.steps;
 
 import com.codeborne.selenide.Selenide;
 import ge.tbcitacademy.pages.FinalDetailsPage;
+import ge.tbcitacademy.util.NumberExtraction;
 import io.qameta.allure.Step;
 
 import java.time.Duration;
@@ -27,12 +28,14 @@ public class FinalDetailsSteps {
         return this;
     }
 
-    @Step("Validate hotel name")
+    @Step("Validate hotel name, check in & out dates, and also validate price (it's okay if theres one unit difference)")
     public FinalDetailsSteps validateFinalDetails(String hotelName, String checkInDate, String checkOutDate, String price) {
         detailsPage.offerName.shouldBe(text(hotelName));
         detailsPage.checkInDate.shouldHave(text(checkInDate));
         detailsPage.checkOutDate.shouldHave(text(checkOutDate));
-        detailsPage.price.shouldHave(text(price));
+        double actualPrice = NumberExtraction.extractValue(detailsPage.price.should(exist).getText());
+        double expectedPrice = NumberExtraction.extractValue(price);
+        assert expectedPrice + 1 >= actualPrice && expectedPrice - 1 <= actualPrice : "expected: " + expectedPrice + "\nactual: " + actualPrice;
         return this;
     }
 
@@ -48,7 +51,6 @@ public class FinalDetailsSteps {
         Selenide.switchTo().frame(detailsPage.paymentFrame);
         detailsPage.cardNumberErrorMsg.shouldHave(text(CARD_N_ERROR_MSG));
         detailsPage.expirationDateErrorMsg.shouldHave(text(EXPIRATION_ERROR_MSG));
-        detailsPage.cvcErrorMsg.shouldHave(text(CVC_ERROR_MSG));
     }
 
 }

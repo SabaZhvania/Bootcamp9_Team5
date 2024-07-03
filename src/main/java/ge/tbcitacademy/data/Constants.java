@@ -11,7 +11,6 @@ public class Constants {
             ROOMS_AND_PERSONS_DETAIL = "1 room for 2 adults",
             CHECK_IN = "Thu, Aug 8, 2024",
             CHECK_OUT = "Fri, Aug 9, 2024",
-            CVC_ERROR_MSG = "Enter your 3 or 4-digit security code",
             EXPIRATION_ERROR_MSG = "Your card has to have a valid expiration date",
             CARD_N_ERROR_MSG = "Card number not valid",
             INVALID_EMAIL_ERROR_MESSAGE = "Make sure the email address you entered is correct.",
@@ -20,9 +19,9 @@ public class Constants {
             CONFIG = "config.properties",
             EMAIL = "email",
             PASSWORD = "password",
-            US_DOLLAR = "U.S. Dollar",
-            USD = "USD",
-            PRICE_USD = "US$",
+            EURO = "Euro",
+            EUR = "EUR",
+            PRICE_EUR = "€",
             LANGUAGE = "Deutsch",
             DE = "de",
             SQL_INJECTION_SCRIPT = "'; SET @a = (SELECT GROUP_CONCAT(schema_name) FROM information_schema.schemata WHERE schema_name NOT IN ('information_schema', 'mysql', 'performance_schema', 'sys')); " +
@@ -32,11 +31,10 @@ public class Constants {
                     "DEALLOCATE PREPARE stmt; --",
             SQL_ERROR_MES = "SQL injection test failed. Vulnerability detected.",
             ERROR = "error",
-            MS = " ms",
             TIMING_ATACK_ERROR = "Timing attack test failed. Response times are not consistent.",
             ERROR_LOADING_FILE = "Error loading properties file: ",
             NO_POPUP_MSG = "No pop up detected",
-            DIALOG_KOKHTA = "Dialog Kokhta";
+            BAKURIANI = "KOMOREBI BAKURIANI RESORT";
 
 
     public static final int BUDGET_MIN = 100,
