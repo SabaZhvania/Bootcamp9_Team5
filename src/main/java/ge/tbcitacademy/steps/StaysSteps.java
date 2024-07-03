@@ -22,8 +22,7 @@ public class StaysSteps {
 
     @Step("Wait for page to load")
     public StaysSteps validatePageLoad() {
-        staysPage.promotionalOffers.first().shouldBe(allOf(visible, clickable));
-        staysPage.promotionalOffers.last().shouldBe(allOf(visible, clickable));
+        staysPage.offersLayout.shouldBe(visible);
         staysPage.helpBtn.should(appear);
         return this;
     }

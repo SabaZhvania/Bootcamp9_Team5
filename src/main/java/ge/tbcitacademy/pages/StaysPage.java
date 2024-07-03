@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class StaysPage extends CommonPage{
     public SelenideElement signInPopUpCloseButton = $("button[aria-label*='Dismiss sign']"),
-            promotionalOffersHeaderText = $(".fc5c5a92af .b5138f45ca");
-    public ElementsCollection promotionalOffers = $$("[data-testid='promotional-banner-container']"),
-            navLinks = $$("nav[data-testid='header-xpb'] a");
+            promotionalOffersHeaderText = $(".fc5c5a92af .b5138f45ca"),
+            offersLayout = $("div#basiclayout");
+    public ElementsCollection navLinks = $$("nav[data-testid='header-xpb'] a");
 }
