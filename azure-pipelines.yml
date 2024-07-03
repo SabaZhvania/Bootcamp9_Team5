@@ -46,7 +46,20 @@ jobs:
           sonarQubeRunAnalysis: false
         continueOnError: true
 
+      - task: DownloadPipelineArtifact@2
+        inputs:
+          buildType: 'specific'
+          project: 'e452c42c-77b8-40b1-af62-477ea0217739'
+          definition: '6'
+          buildVersionToDownload: 'latestFromBranch'
+          branchName: 'refs/heads/azure-pipelines'
+          artifactName: 'allure-report'
+          targetPath: '$(System.DefaultWorkingDirectory)/public'
+        continueOnError: true
+
       - script: |
+          chmod +x check_allure_history.sh
+          ./check_allure_history.sh
           allure generate -c allure-results -o allure-report
         displayName: "Generate Report"
 
